@@ -39,6 +39,9 @@ RUN apk update
 RUN apk add git
 RUN apk add build-base linux-headers
 
+# Required for git actions
+RUN apk add openssh
+
 # Python dependencies
 WORKDIR /code
 
