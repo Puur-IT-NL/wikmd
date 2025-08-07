@@ -1,4 +1,4 @@
-FROM python:3.9-alpine3.17 as python-base
+FROM python:3.12-alpine AS python-base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -32,7 +32,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN python -m venv $VIRTUAL_ENV
 
 # BUILDER
-FROM python-base as python-builder
+FROM python-base AS python-builder
 
 # Install our dependencies
 RUN apk update
@@ -54,7 +54,7 @@ RUN python -m pip install toml-to-requirements==0.2.0
 RUN toml-to-req --toml-file pyproject.toml
 
 RUN python -m pip install --no-cache-dir --upgrade -r ./requirements.txt
-
+RUN git config --global --add safe.directory /wiki
 # Copy our source content over
 COPY ./src/wikmd /code/wikmd
 

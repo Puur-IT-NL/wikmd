@@ -103,5 +103,6 @@ src/wikmd/plugins/draw/drawings/*
 
 # Personal wiki pages
 wiki/*
+wiki/
 
 temp/*
